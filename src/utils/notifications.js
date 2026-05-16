@@ -4,7 +4,8 @@ import { Platform } from 'react-native';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
     shouldPlaySound: true,
     shouldSetBadge: true,
   }),
@@ -49,7 +50,7 @@ export async function scheduleTaskNotification(task) {
     adjustToNextOccurrence(reminderDate, task.repeat);
   }
 
-  const trigger = { date: reminderDate };
+  const trigger = { type: Notifications.SchedulableTriggerInputTypes.DATE, date: reminderDate };
 
   const notificationId = await Notifications.scheduleNotificationAsync({
     content: {
